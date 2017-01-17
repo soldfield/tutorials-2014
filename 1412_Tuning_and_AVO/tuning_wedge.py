@@ -1,11 +1,27 @@
 """
 Python script to generate a zero-offset synthetic from a 3-layer wedge model.
 
+Adapted by: Simon Oldfield
+Adaption date: 17-Jan-2017
+Last modified:  17-Jan-2017
+
 Created by:    Wes Hamlyn
 Create Date:   19-Aug-2014
-Last Mod:      1-Nov-2014
 
 This script is provided without warranty of any kind.
+
+SJO Adaptions:
+Adapt script to calculate the response for a range of incidence angles.  Plot
+the amplitude response for the angle-gathered signal, rather than assuming
+normal incidence.
+
+Tasks:
+- Convert reflection coefficient calculation to angle based
+- Adjust this version to calculate assuming a zero-angle sum
+- Calculate range of reflectivities for angle and calculate angle-gathered ref
+- sum and display
+- compare to the zero-angle equivalent
+
 
 """
 
@@ -244,7 +260,7 @@ for model in range(0, nmodel):
     syn_buf = np.convolve(rc, wvlt_amp, mode='same')
     syn_buf = list(syn_buf)
     syn_zo.append(syn_buf)
-    print "finished step %i" % (model)
+    print('finished step %i' % (model))
     
 syn_zo = np.array(syn_zo)
 t = np.array(t)
